@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HGG IN MY HEART</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #ffe4e9;
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Chữ trên */
+        .text-top {
+            font-size: 5.5rem;
+            font-weight: 900;
+            color: #ff1493;
+            letter-spacing: 12px;
+            text-shadow: 
+                0 0 20px #ff69b4,
+                0 0 40px #ff1493,
+                0 0 60px #ff69b4;
+            margin-bottom: 30px;
+            animation: glow 2s infinite alternate;
+            z-index: 10;
+        }
+
+        /* Ảnh trái tim thật - chính xác 100% như bạn gửi */
+        .heart-img {
+            width: 420px;
+            max-width: 90vw;
+            animation: heartbeat 2s ease-in-out infinite;
+            filter: drop-shadow(0 20px 40px rgba(255,105,180,0.5));
+        }
+
+        /* Chữ dưới */
+        .text-bottom {
+            font-size: 5.5rem;
+            font-weight: 900;
+            color: #ff1493;
+            letter-spacing: 16px;
+            text-shadow: 
+                0 0 20px #ff69b4,
+                0 0 40px #ff1493,
+                0 0 60px #ff69b4;
+            margin-top: 50px;
+            animation: glow 2s infinite alternate-reverse;
+            z-index: 10;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.12); }
+            30% { transform: scale(1); }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #ff69b4; }
+            to { text-shadow: 0 0 50px #ff1493, 0 0 80px #ff69b4; }
+        }
+
+        /* Tim rơi */
+        .particle {
+            position: absolute;
+            font-size: 28px;
+            pointer-events: none;
+            animation: fall linear forwards;
+            filter: drop-shadow(0 0 10px #ff1493);
+        }
+
+        @keyframes fall {
+            to { transform: translateY(120vh) rotate(900deg); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .text-top, .text-bottom {
+                font-size: 2.8rem;
+                letter-spacing: 6px;
+            }
+            .heart-img {
+                width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="text-top">HGG IN</div>
+
+    <!-- DÁN LINK ẢNH CỦA BẠN VÀO ĐÂY -->
+   <img src="heart.jpg" alt="Trái tim hồng đẹp" class="heart-img">
+    <!-- Nếu bạn muốn dùng ảnh local: đổi thành src="ten-anh-cua-ban.png" và để cùng thư mục -->
+
+    <div class="text-bottom">MY HEART</div>
+
+    <script>
+        // Tim rơi lung linh
+        setInterval(() => {
+            const hearts = ['❤️', '💖', '💗', '💕', '💞', '✨', '🌸', '🌷', '💮'];
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            p.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.top = '-60px';
+            p.style.animationDuration = (Math.random() * 5 + 7) + 's';
+            p.style.opacity = Math.random() * 0.8 + 0.3;
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 15000);
+        }, 200);
+    </script>
+</body>
+</html>
